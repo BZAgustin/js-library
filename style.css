@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr 9fr 1fr;
+}
+
+/* ------------- HEADER ------------- */
+
+header {
+  background-color: aquamarine;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ------------- CONTENT ------------- */
+
+section {
+  background-color: burlywood;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.card {
+  background-color: coral;
+}
+
+/* ------------- FOOTER ------------- */
+
+footer {
+  background-color: chocolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
