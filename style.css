@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -20,22 +21,38 @@ header {
   padding: 8px;
 }
 
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+#new-book:hover {
+  cursor: pointer;
+}
+
 /* ------------- CONTENT ------------- */
 
 section {
-  background-color: burlywood;
+  background-color: rgb(146, 202, 255);
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+  grid-auto-columns: 200px;
   gap: 12px;
   padding: 12px;
+  overflow: scroll;
 }
 
 .card {
-  background-color: coral;
+  min-width: 200px;
+  min-height: 200px;
+  background-color: rgb(80, 156, 255);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 12px;
 }
@@ -52,6 +69,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: sticky;
 }
 
 /* ------------- FORM OVERLAY ------------- */
@@ -64,7 +82,7 @@ footer {
   justify-content: center;
   align-items: center;
   background-color: rgba(0,0,0,0.5); 
-  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  z-index: 2;
 }
 
 .form-container {
@@ -78,4 +96,10 @@ form {
   flex-direction: column;
   gap: 8px;
   padding: 12px;
+}
+
+.read {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
 }
