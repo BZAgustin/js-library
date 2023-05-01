@@ -45,22 +45,62 @@ section {
   overflow: scroll;
 }
 
+.card, .c-header, .c-info, .c-read {
+  display: flex;
+}
+
 .card {
   min-width: 200px;
   min-height: 200px;
   background-color: rgb(80, 156, 255);
   border-radius: 12px;
-  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   padding: 12px;
 }
 
-.c-header, .c-read {
-  display: flex;
-  justify-content: space-between;
+.c-header, .c-info, .c-read {
+  justify-content: center;
+  align-items: center;
 }
+
+.c-header {
+  text-align: center;
+  gap: 32px;
+}
+
+.c-read {
+  text-align: center;
+  gap: 12px;
+}
+
+.c-info {
+  flex-direction: column;
+}
+
+.c-header h3 {
+  min-width: 75%;
+  text-align: center;
+}
+
+.c-read input {
+  height: 24px;
+  width: 24px;
+}
+
+.card button {
+  margin-top: 12px;
+  width: 50%;
+}
+
+hr {
+  margin: auto;
+  width: 128px;
+  color: rgb(77, 147, 209);
+}
+
 
 /* ------------- FOOTER ------------- */
 

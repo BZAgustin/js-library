@@ -47,10 +47,12 @@ function displayCard(title, author, pages, read) {
     header: document.createElement('div'),
     info: document.createElement('div'),
     footer: document.createElement('div'),
+    divisor: document.createElement('hr'),
+    divisor2: document.createElement('hr'),
     bookTitle: document.createElement('h3'),
     bookAuthor: document.createElement('h4'),
     bookPages: document.createElement('h5'),
-    bookReadLabel: document.createElement('h5'),
+    bookReadLabel: document.createElement('h4'),
     bookRead: document.createElement('input'),
     bookRemove: document.createElement('button')
   }
@@ -61,8 +63,8 @@ function displayCard(title, author, pages, read) {
   card.bookPages.textContent = `${pages} pages`;
   card.bookRead.type = 'checkbox';
   card.bookRead.checked = read;
-  card.bookReadLabel.textContent = 'Read:';
-  card.bookRemove.textContent = 'X';
+  card.bookReadLabel.textContent = 'Read';
+  card.bookRemove.textContent = 'Remove';
 
   // Add respective classes
   card.header.classList.add('c-header');
@@ -70,17 +72,20 @@ function displayCard(title, author, pages, read) {
   card.footer.classList.add('c-read');
 
   card.header.appendChild(card.bookTitle);
-  card.header.appendChild(card.bookRemove);
   card.info.appendChild(card.bookAuthor);
   card.info.appendChild(card.bookPages);
   card.footer.appendChild(card.bookReadLabel);
   card.footer.appendChild(card.bookRead);
+  card.footer.appendChild(card.bookRemove);
 
   const container = document.createElement('div');
   container.classList.add('card');
   container.appendChild(card.header);
+  container.appendChild(card.divisor);
   container.appendChild(card.info);
+  container.appendChild(card.divisor2);
   container.appendChild(card.footer);
+  container.appendChild(card.bookRemove);
 
   return container;
 }
@@ -97,7 +102,7 @@ function displayLibrary() {
 function addListeners() {
   const cardArray = Array.from(section[0].children);
   for(const card of cardArray) {
-    const removeButton = card.children[0].children[1];
+    const removeButton = card.children[5];
     removeButton.addEventListener('click', () => {
       myLibrary.splice(cardArray.indexOf(card), 1);
       displayLibrary();
