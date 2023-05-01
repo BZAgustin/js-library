@@ -1,7 +1,12 @@
+/* eslint-disable no-loop-func */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-plusplus */
+// Select HTML body, section (card container) and overlay ()
 const section = document.getElementsByTagName('section');
 const overlay = document.querySelector('.overlay');
-const addNewBook = document.getElementById('new-book');
+const addButton = document.getElementById('new-book');
 
+// Grab the values that the user inputs
 const input = {
   bookName: document.getElementById('name'),
   bookAuthor: document.getElementById('author'),
@@ -10,8 +15,7 @@ const input = {
   addBook: document.getElementById('add-book')
 };
 
-let myLibrary = [];
-
+// Declare the Book class
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
@@ -21,6 +25,10 @@ class Book {
   }
 }
 
+// Declare the array that will contain the library, which initially has one book
+const myLibrary = [new Book('Fahrenheit 451', 'Ray Bradbury', 192, false)];
+
+// Function to add a new Book object to the library array
 function addBookToLibrary() {
   const newBook = new Book(
     input.bookName.value,
@@ -32,25 +40,31 @@ function addBookToLibrary() {
   myLibrary.push(newBook);
 }
 
+// Function to create and append all the HTML elements necessary for displaying a card
 function displayCard(title, author, pages, read) {
+  // Group all declared elements in a 'card' object
   const card = {
     header: document.createElement('div'),
     info: document.createElement('div'),
     footer: document.createElement('div'),
-    bookTitle: document.createElement('h2'),
-    bookAuthor: document.createElement('h3'),
-    bookPages: document.createElement('h4'),
+    bookTitle: document.createElement('h3'),
+    bookAuthor: document.createElement('h4'),
+    bookPages: document.createElement('h5'),
+    bookReadLabel: document.createElement('h5'),
     bookRead: document.createElement('input'),
     bookRemove: document.createElement('button')
   }
 
+  // Set the content for every element based on the user input
   card.bookTitle.textContent = title;
   card.bookAuthor.textContent = author;
-  card.bookPages.value = pages;
+  card.bookPages.textContent = `${pages} pages`;
   card.bookRead.type = 'checkbox';
   card.bookRead.checked = read;
+  card.bookReadLabel.textContent = 'Read:';
   card.bookRemove.textContent = 'X';
 
+  // Add respective classes
   card.header.classList.add('c-header');
   card.info.classList.add('c-info');
   card.footer.classList.add('c-read');
@@ -59,6 +73,7 @@ function displayCard(title, author, pages, read) {
   card.header.appendChild(card.bookRemove);
   card.info.appendChild(card.bookAuthor);
   card.info.appendChild(card.bookPages);
+  card.footer.appendChild(card.bookReadLabel);
   card.footer.appendChild(card.bookRead);
 
   const container = document.createElement('div');
@@ -71,6 +86,7 @@ function displayCard(title, author, pages, read) {
 }
 
 function displayLibrary() {
+  // clear section of all children
   section[0].innerHTML = '';
   // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for(const book of myLibrary) {
@@ -78,12 +94,47 @@ function displayLibrary() {
   }
 }
 
-addNewBook.addEventListener('click', () => {
-  overlay.style.display = "flex";
-})
+function addListeners() {
+  const cardArray = Array.from(section[0].children);
+  for(const card of cardArray) {
+    const removeButton = card.children[0].children[1];
+    removeButton.addEventListener('click', () => {
+      myLibrary.splice(cardArray.indexOf(card), 1);
+      displayLibrary();
+      addListeners();
+    });
+  }
+}
 
-input.addBook.addEventListener('click', () => {
-  overlay.style.display = "none";
-  addBookToLibrary();
-  displayLibrary();
+function clearFields() {
+  input.bookName.value = '';
+  input.bookAuthor.value = '';
+  input.bookPages.value = '';
+  input.bookRead.checked = false;
+}
+
+displayLibrary();
+addListeners();
+
+addButton.addEventListener('click', () => {
+  overlay.style.display = "flex";
 });
+
+function fieldsMet() {
+  return input.bookName.value !== '' && 
+         input.bookAuthor.value !== '' && 
+         input.bookPages.value > 0;
+}
+
+function addNewBook() {
+  if(fieldsMet()) {
+    addBookToLibrary();
+    displayLibrary();
+    clearFields();
+    overlay.style.display = "none"; // hide overlay
+    addListeners();
+  }
+}
+
+input.addBook.addEventListener('click', addNewBook);
+
