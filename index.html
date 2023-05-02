@@ -11,30 +11,35 @@
 <body>
   <header>
     <div class="logo-title">
-      <img src="./assets/book.svg" alt="Book">
-      <h1>LIBRARY</h1>
+      <img src="./assets/books.png" alt="Book">
+      <h1>ODIN LIBRARY</h1>
     </div>
-
-    <img src="assets/add.svg" alt="Add" id="new-book">
+    <div class="book-add">
+      <img src="assets/add.svg" alt="Add" id="new-book">
+    </div>
   </header>
   <section>
     <!-- JS injects content here -->
   </section>
   <footer>
-    <h2>Footer</h2>
+    <h3>Built by <a href="https://github.com/BZAgustin/">Agustín Bustos Zanelli</a></h3>
+    <span><a href="https://github.com/BZAgustin/"><img src="assets/github.png" alt="github"></a></span>
+    <h3>2023</h3>
   </footer>
 
   <div class="overlay">
     <div class="form-container">
       <form action="#">
         <label for="name">Book Name</label>
-        <input type="text" id="name" name="name" minlength="1" maxlength="36" required>
+        <input type="text" id="name" name="name" placeholder="Enter name..." minlength="1" maxlength="36" required>
         <label for="author">Author</label>
-        <input type="text" id="author" name="author" minlength="1" maxlength="24"required>
+        <input type="text" id="author" name="author" placeholder="Enter author..."minlength="1" maxlength="24"required>
         <label for="pages">Pages</label>
-        <input type="number" id="pages" name="pages" min="0" max="9999" required>
-        <label for="read">Read</label>
-        <input type="checkbox" id="read" name="read">
+        <input type="number" id="pages" name="pages" placeholder="0 to 9999" min="0" max="9999" required>
+        <div class="read">
+          <label for="read">Read?</label>
+          <input type="checkbox" id="read" name="read">
+        </div>
         <button type="submit" id="add-book">Add New Book</button>
       </form>
     </div>
