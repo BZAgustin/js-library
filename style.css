@@ -229,6 +229,23 @@ form input:focus {
   outline: none;
 }
 
+.overlay button {
+  color: white;
+  background-color: darkolivegreen;
+  font-weight: 900;
+  padding: 4px;
+  border: none;
+  border-radius: 3px;
+  width: 70%;
+  margin: auto;
+  transition: 0.1s;
+}
+
+.overlay button:hover {
+  background-color: rgb(109, 138, 59);
+  cursor: pointer;
+}
+
 .read {
   display: flex;
   justify-content: center;
