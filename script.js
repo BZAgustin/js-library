@@ -64,7 +64,7 @@ function displayCard(title, author, pages, read) {
   card.bookRead.type = 'checkbox';
   card.bookRead.checked = read;
   card.bookReadLabel.textContent = 'Read';
-  card.bookRemove.textContent = 'Remove';
+  card.bookRemove.textContent = 'X';
 
   // Add respective classes
   card.header.classList.add('c-header');
@@ -101,12 +101,24 @@ function displayLibrary() {
 
 function addListeners() {
   const cardArray = Array.from(section[0].children);
+  // Add listeners to 'Remove' buttons
   for(const card of cardArray) {
     const removeButton = card.children[5];
     removeButton.addEventListener('click', () => {
       myLibrary.splice(cardArray.indexOf(card), 1);
       displayLibrary();
       addListeners();
+    });
+  }
+  // Add listeners to 'Read' checkboxes
+  for(const card of cardArray) {
+    const read = card.children[4].children[1];
+    read.addEventListener('click', () => {
+      if(read.checked) {
+        myLibrary[cardArray.indexOf(card)].read = true;
+      } else {
+        myLibrary[cardArray.indexOf(card)].read = false;
+      }
     });
   }
 }
